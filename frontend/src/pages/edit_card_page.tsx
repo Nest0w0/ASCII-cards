@@ -20,14 +20,12 @@ function EditCardPage(){
     );
     const cardID = useParams();
 
+
     useEffect(()=>{
         fetch('http://localhost:3000/card/'+cardID['id'])
         .then((data) => data.json())
         .then((data) => setCard(data));
     }, []);
-
-    //console.log(card);
-    
 
     return(
         <div>

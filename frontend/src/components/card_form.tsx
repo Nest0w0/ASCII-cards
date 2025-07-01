@@ -10,6 +10,10 @@ interface CardFormProps{
     method: string
 };
 
+function randomshit(expantion: number,setExpantionID: React.Dispatch<React.SetStateAction<number>>, id: number){
+    setExpantionID(id);
+    console.log(expantion);
+}
 
 function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, defaultHealth, cardID, method}: CardFormProps){
     const [expantionID, setExpantionID] = useState(defaultExpantionID);
@@ -18,24 +22,21 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
     const [attack, setAttack] = useState(defaultAttack);
     const [health, setHealth] = useState(defaultHealth);
 
+    const [expantions, setExpantions] = useState([]);
+    useEffect(()=>{
+        fetch('http://localhost:3000/expantion')
+        .then((data) => data.json())
+        .then((data) => setExpantions(data));
+    },[]);
     
     useEffect(() => {
-        
         setExpantionID(defaultExpantionID);
-        
-
-            setMana(defaultMana);
-        
-
-            setName(defaultName);
-        
-
-            setAttack(defaultAttack);
-        
-
-            setHealth(defaultHealth);
-        
+        setMana(defaultMana);
+        setName(defaultName);
+        setAttack(defaultAttack);
+        setHealth(defaultHealth);
     }, [defaultExpantionID, defaultMana, defaultName, defaultAttack, defaultHealth]);
+
 
     return(
         <form id="addCardForm">
@@ -50,12 +51,33 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
                     <p className="text-left">
                         
                         ║
-                        <input
-                        type="text" id= "expantionIcon" maxLength={1} value={expantionID.toString()}
+                        <select
+                        id= "expantionIcon"
                         onChange={(e) => setExpantionID(Number(e.target.value))}
-                        className="w-6 bg-blue-100 text-center">
-                        </input>
-                        <span className="ml-0.5">
+                        className="w-8 bg-blue-100 text-center -ml-0.5">
+                            {
+                                expantions.map(expantion => {
+                                    if(expantion['id'] === expantionID){
+                                        return(
+                                        <option
+                                        key={expantion['id']}
+                                        selected value={expantion['id']}
+                                        onSelect={() => console.log('zksds')}>
+                                            {expantion['icon']}
+                                        </option>);
+                                    }else{
+                                        return(
+                                        <option
+                                        key={expantion['id']}
+                                        value={expantion['id']}
+                                        onSelect={() => console.log('zksds')}>
+                                            {expantion['icon']}
+                                        </option>);
+                                    }    
+                                })
+                            }
+                        </select>
+                        <span className="-ml-1">
                             ║ 
                         </span>
                         <span className="float-end">
