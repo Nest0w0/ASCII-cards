@@ -10,11 +10,6 @@ interface CardFormProps{
     method: string
 };
 
-function randomshit(expantion: number,setExpantionID: React.Dispatch<React.SetStateAction<number>>, id: number){
-    setExpantionID(id);
-    console.log(expantion);
-}
-
 function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, defaultHealth, cardID, method}: CardFormProps){
     const [expantionID, setExpantionID] = useState(defaultExpantionID);
     const [mana, setMana] = useState(defaultMana);

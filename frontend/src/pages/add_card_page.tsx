@@ -18,12 +18,6 @@ function AddCardPage(){
                 cardID={0}
                 method = 'POST'
                 ></CardForm>
-
-                {
-                /*<button className="bg-red-300 w-1/12 h-1/12 rounded-lg mt-20">
-                    <a>Create</a>
-                </button>*/
-                }
             </div>
         </div>
     );
