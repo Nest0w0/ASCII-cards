@@ -62,12 +62,28 @@ function InfoCardPage(){
                     </p>
                 </div>
 
+                <div className="flex flex-row w-full justify-center">
+                    <button 
+                    className="bg-blue-300 w-30 h-15 rounded-lg mt-15 mr-15 hover:border-2 hover:border-yellow-200"
+                    onClick={() => navigate('/edit_card/'+card['id'])}>
+                        Edit
+                    </button>
 
-                <button 
-                className="bg-red-300 w-30 rounded-lg h-1/12 mt-15 focus:bg-red-400 hover:border-2 hover:border-yellow-200"
-                onClick={() => navigate('/edit_card/'+card['id'])}>
-                    Change
-                </button>
+                    <button 
+                    className="bg-red-300 w-30 rounded-lg mt-15 ml-15 focus:bg-red-400 hover:border-2 hover:border-yellow-200"
+                    onClick={() => fetch('http://localhost:3000/card/'+card['id'],
+                        {
+                            method: 'DELETE',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: ''
+                        }
+                    )}>
+                        Erase
+                    </button>
+                </div>
             </div>
         </div>
     );

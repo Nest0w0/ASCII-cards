@@ -1,5 +1,6 @@
 import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
+import ExpantionButton from "./expantion_button";
 
 interface SideBarProps{
     onExpantionSelect: (expantionId: number) => void,
@@ -34,25 +35,15 @@ function SideBar({onExpantionSelect, expantionID}: SideBarProps){
                 >        
                     <a className="flex flex-1 justify-center">All</a>
                 </button>
+                
                 {
                     expantions.map(expantion => {
                         return(
-                            <button
-                                key={expantion['id']} 
-                                className = {`${expantionID == expantion['id'] ? 'bg-blue-300 font-bold' : ''} flex items-center w-full justify-between h-15 text-m hover:text-lg border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
-                                onClick={() => {onExpantionSelect(expantion['id'])}}    
-                            >
-                                    <a className="ml-5">{expantion['icon']}</a>
-                                    <a className="flex flex-1 justify-center">{expantion['name']}</a>
-
-                                <button
-                                className={`${expantionID == expantion['id'] ? 'bg-gray-300' : 'bg-blue-300'} w-1/5 h-7 mr-2 rounded-lg`}
-                                onClick={() => navigate('/edit_expantion/'+expantion['id'])}
-                                >
-                                    Edit
-                                </button>
-                            </button>
-                        )
+                            <ExpantionButton
+                            onExpantionSelect={onExpantionSelect}
+                            expantionID={expantionID}
+                            expantion={expantion}/>
+                        );
                     })
                 }
             
