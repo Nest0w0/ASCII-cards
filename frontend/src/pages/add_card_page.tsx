@@ -1,5 +1,6 @@
 import NavBar from "../components/navbar";
 import CardForm from "../components/card_form";
+import Modal from "../components/modal";
 
 
 

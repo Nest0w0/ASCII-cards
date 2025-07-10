@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import Modal from "../components/modal";
         
 interface CardFormProps{
     defaultExpantionID: number,
@@ -18,6 +19,7 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
     const [health, setHealth] = useState(defaultHealth);
 
     const [expantions, setExpantions] = useState([]);
+
     useEffect(()=>{
         fetch('http://localhost:3000/expantion')
         .then((data) => data.json())
@@ -32,9 +34,65 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
         setHealth(defaultHealth);
     }, [defaultExpantionID, defaultMana, defaultName, defaultAttack, defaultHealth]);
 
+    const [modalState, setModalState] = useState({
+        isOpen: false,
+        title: '',
+        message: '',
+        isError: false,
+    });
+
+    const Submit = async (e: FormEvent) => {
+        
+        e.preventDefault();
+        const url = (method === 'POST' ? 'http://localhost:3000/card/': 'http://localhost:3000/card/'+cardID);
+
+        try{
+            const response = await fetch(
+                url,
+                {
+                    method: method,
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "name": name,
+                        "attack": attack,
+                        "health": health,
+                        "mana": mana,
+                        "expantion": expantionID
+                    })
+                });
+
+                if(!response.ok){
+                    const errorData = await response.json().catch(
+                        () => ({message: "No se pudo obtener el mensaje de error"})
+                    );
+
+                    throw new Error(errorData.message);
+                }
+
+                const successMesssage = method === 'POST' ? 'The card has been created successfully' : 'The card has been edited successfully';
+
+                setModalState({
+                    isOpen: true,
+                    title: 'Success',
+                    message: successMesssage,
+                    isError:false
+                    })
+        }catch{
+            setModalState({
+                isOpen: true,
+                title: 'Error',
+                message: 'An error has ocurred',
+                isError: true
+            })
+        }
+    }
 
     return(
-        <form id="addCardForm">
+        <>
+        <form id="addCardForm" onSubmit={Submit}>
                 <div className="font-mono w-50 leading-5">
                     <p className="text-left -ml-10">Expantion: <span className="float-end -mr-5">Mana:</span></p>
                     <a className="float-left">
@@ -54,20 +112,22 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
                                 expantions.map(expantion => {
                                     if(expantion['id'] === expantionID){
                                         return(
-                                        <option
-                                        key={expantion['id']}
-                                        selected value={expantion['id']}
-                                        onSelect={() => console.log('zksds')}>
-                                            {expantion['icon']}
-                                        </option>);
+                                            <option
+                                            key={expantion['id']}
+                                            selected value={expantion['id']}
+                                            onSelect={() => setExpantionID(expantion['id'])}>
+                                                {expantion['icon']}
+                                            </option>
+                                        );
                                     }else{
                                         return(
-                                        <option
-                                        key={expantion['id']}
-                                        value={expantion['id']}
-                                        onSelect={() => console.log('zksds')}>
-                                            {expantion['icon']}
-                                        </option>);
+                                            <option
+                                            key={expantion['id']}
+                                            value={expantion['id']}
+                                            onSelect={() => setExpantionID(expantion['id'])}>
+                                                {expantion['icon']}
+                                            </option>
+                                        );
                                     }    
                                 })
                             }
@@ -144,48 +204,19 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
                     <input
                     type="submit" value={"Submit"}
                     className="bg-red-300 w-full h-1/12 rounded-lg mt-20"
-                    onClick={()=> {
-                        if(method === 'POST'){
-                            fetch(
-                            "http://localhost:3000/card/",
-                            {
-                                method: "POST",
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    "name": name,
-                                    "attack": attack,
-                                    "health": health,
-                                    "mana": mana,
-                                    "expantion": expantionID
-                                })
-                            });
-                        }else{
-                            fetch(
-                            "http://localhost:3000/card/"+cardID,
-                            {
-                                method: "PATCH",
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    "name": name,
-                                    "attack": attack,
-                                    "health": health,
-                                    "mana": mana,
-                                    "expantion": expantionID
-                                })
-                            });
-                        }
+                    />
+        </form>
 
+            <Modal
+            isOpen ={modalState.isOpen}
+            title = {modalState.title}
+            message = {modalState.message}
+            isError = {modalState.isError}
+            onClose={() => {}}
+            >
 
-                        
-                    }}></input>
-            </form>
-
+            </Modal>
+        </>                    
     );
 }
 
