@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import Modal from "./modal";
 
-interface ExpantionFormProps{
+interface ExpantionFormProps {
     title: string,
     defaultID: number,
     defaultIcon: string,
@@ -9,7 +10,7 @@ interface ExpantionFormProps{
 }
 
 
-function ExpantionForm({defaultID, defaultIcon, defaultName, title, method}: ExpantionFormProps){
+function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: ExpantionFormProps) {
     const [icon, setIcon] = useState("");
     const [name, setName] = useState("");
 
@@ -18,68 +19,106 @@ function ExpantionForm({defaultID, defaultIcon, defaultName, title, method}: Exp
         setName(defaultName);
     }, [defaultIcon, defaultName]);
 
+    const [modalState, setModalState] = useState({
+        isOpen: false,
+        title: '',
+        message: '',
+        isError: false
+    });
 
-    return(
+    const Submit = async (e: FormEvent) => {
+        e.preventDefault();
+
+        const url = (method === 'POST' ? 'http://localhost:3000/expantion' : 'http://localhost:3000/expantion/' + defaultID);
+
+        try {
+            const response = await fetch(
+                url,
+                {
+                    method: method,
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        'name': name,
+                        'icon': icon.toUpperCase()
+                    })
+                }
+            );
+
+            if (!response.ok) {
+
+                const errorData = await response.json().catch(
+
+                    () => ({ message: "No se pudo obtener el mensaje de error" })
+                );
+
+                throw new Error(errorData.message);
+            }
+
+            const successMessage = (method === 'POST' ? 'The expantion has been created successfully' : 'The expantion has been edited succesfully');
+
+            setModalState({
+                isOpen: true,
+                title: 'Success',
+                message: successMessage,
+                isError: false
+            });
+        }
+        catch {
+            setModalState({
+                isOpen: true,
+                title: 'Error',
+                message: 'An Error has ocurred',
+                isError: true
+            });
+        }
+    }
+
+    return (
         <div className="bg-blue-300 w-1/3 rounded-lg">
-            <p
-            className="mb-5 mt-3 text-lg"
-            >
+            <p className="mb-5 mt-3 text-lg">
                 {title}
             </p>
 
-            <form className="flex flex-row mb-5">
+            <form className="flex flex-row mb-5" onSubmit={Submit}>
                 <div className="flex-colw-15 ml-10">
                     <label>
                         Icon:
                     </label>
                     <br></br>
                     <input
-                    type="text" maxLength={1} value={icon}
-                    className="bg-blue-100 w-15 text-center"
-                    onChange={(e) => setIcon(e.target.value)}></input>
+                        type="text" maxLength={1} value={icon}
+                        className="bg-blue-100 w-15 text-center"
+                        onChange={(e) => setIcon(e.target.value)}></input>
                 </div>
 
                 <div className="flex-1">
                     <label
                     >
-                        Name: 
+                        Name:
                     </label>
                     <br></br>
                     <input
-                    type="text" value = {name}
-                    className="bg-blue-100 w-60 text-center"
-                    onChange={(e) => setName(e.target.value)}></input>
+                        type="text" value={name}
+                        className="bg-blue-100 w-60 text-center"
+                        onChange={(e) => setName(e.target.value)}></input>
                 </div>
+
+                <input
+                    type="submit" value={"Submit"}
+                    className="bg-red-300 w-full h-1/12 rounded-lg mt-20"
+                />
             </form>
 
-            <button
-            className="bg-red-300 w-1/3 h-1/6 rounded-lg mb-3"
-            onClick={() => {
-                if(method === 'POST'){
-                    fetch('http://localhost:3000/expantion',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({'name': name, 'icon': icon.toUpperCase()})
-                    });
-                }else{
-                    fetch('http://localhost:3000/expantion/'+defaultID,
-                        {
-                            method: 'PATCH',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({'name': name, 'icon': icon.toUpperCase()})
-                        });
-                }
-                
-            }}>
-                Submit
-            </button>
+            <Modal
+                isOpen={modalState.isOpen}
+                title={modalState.title}
+                message={modalState.message}
+                isError={modalState.isError}
+                onClose={() => { }}
+            ></Modal>
         </div>
     );
 }

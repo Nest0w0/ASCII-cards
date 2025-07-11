@@ -12,6 +12,11 @@ interface CardFormProps{
 };
 
 function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, defaultHealth, cardID, method}: CardFormProps){
+    /*
+    La primera vez que se renderiza este componente, la consulta a la base de datos no se ha completado, así que al no tener
+    los props correctos, se renderiza con valores vacíos o nulos. Es necesario entonces, tener los Props separados de las variables 
+    que van a ser utilizadas en el formulario, y actualizarlos con useEffect() una vez la consulta se haya completado
+    */
     const [expantionID, setExpantionID] = useState(defaultExpantionID);
     const [mana, setMana] = useState(defaultMana);
     const [name, setName] = useState(defaultName);
@@ -34,6 +39,7 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
         setHealth(defaultHealth);
     }, [defaultExpantionID, defaultMana, defaultName, defaultAttack, defaultHealth]);
 
+    //Esta constante para llevar el estado de los Props del Modal que se encuentra al final
     const [modalState, setModalState] = useState({
         isOpen: false,
         title: '',
@@ -41,9 +47,17 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
         isError: false,
     });
 
+    
     const Submit = async (e: FormEvent) => {
         
+        /*
+        El comportamiento por defecto de un formulario, es que al presionar el botón de tipo "submit", se refresque la página.
+        Sin embargo, si eso ocurre, se refresca antes de que el modal de feedback pueda ser mostrado. Así que, necesitamos
+        prevenir el refresque cuando ocurra el evento de "submit". Eso hace esta línea de código
+        */
         e.preventDefault();
+
+        //Un if terciario para determinar la dirección a la que realizar la petición
         const url = (method === 'POST' ? 'http://localhost:3000/card/': 'http://localhost:3000/card/'+cardID);
 
         try{
@@ -64,16 +78,22 @@ function CardForm({defaultExpantionID, defaultMana, defaultName, defaultAttack, 
                     })
                 });
 
+                //Si la respuesta no está bien, se obtiene un mensaje de error
                 if(!response.ok){
+
                     const errorData = await response.json().catch(
+                        //Si el mensaje de error no está, por problema del servidor, se da uno genérico
                         () => ({message: "No se pudo obtener el mensaje de error"})
                     );
 
                     throw new Error(errorData.message);
                 }
 
+                //Otro if ternario para determinar la descripción del modal
                 const successMesssage = method === 'POST' ? 'The card has been created successfully' : 'The card has been edited successfully';
 
+                //Finalmente, se cambia el estado de los Props del Modal. Dado que se está cambiando la propiedad "isOpen" a true,
+                //esto activa el efecto que hace que el modal se muestre
                 setModalState({
                     isOpen: true,
                     title: 'Success',
