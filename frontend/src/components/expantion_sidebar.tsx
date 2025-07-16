@@ -33,7 +33,7 @@ function SideBar({onExpantionSelect, expantionID}: SideBarProps){
                 
                     onClick={() => onExpantionSelect(0)}
                 >        
-                    <a className="flex flex-1 justify-center">All</a>
+                    <a className="flex flex-1 justify-center">All Expantions</a>
                 </button>
                 
                 {
@@ -51,7 +51,7 @@ function SideBar({onExpantionSelect, expantionID}: SideBarProps){
                 id = 'Add expantion button'
                 key = {-99}
                 className={
-                    `flex items-center w-full justify-center h-15 text-lg group hover:text-lg border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
+                    `flex items-center w-full justify-center h-20 text-lg group hover:text-lg border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
                 
                 onClick={() => {navigate('/add_expantion')}}
                 >        

@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Modal from "./modal";
+import { useNavigate } from "react-router-dom";
 
 interface ExpantionFormProps {
     title: string,
@@ -13,6 +14,8 @@ interface ExpantionFormProps {
 function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: ExpantionFormProps) {
     const [icon, setIcon] = useState("");
     const [name, setName] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIcon(defaultIcon);
@@ -82,33 +85,36 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
                 {title}
             </p>
 
-            <form className="flex flex-row mb-5" onSubmit={Submit}>
-                <div className="flex-colw-15 ml-10">
-                    <label>
-                        Icon:
-                    </label>
-                    <br></br>
-                    <input
-                        type="text" maxLength={1} value={icon}
-                        className="bg-blue-100 w-15 text-center"
-                        onChange={(e) => setIcon(e.target.value)}></input>
+            <form className="mb-5" onSubmit={Submit}>
+                <div className="flex flex-row mb-5">
+                    <div className="flex-colw-15 ml-10">
+                        <label>
+                            Icon:
+                        </label>
+                        <br></br>
+                        <input
+                            type="text" maxLength={1} value={icon}
+                            className="bg-blue-100 w-15 text-center"
+                            onChange={(e) => setIcon(e.target.value)}></input>
+                    </div>
+
+                    <div className="flex-1">
+                        <label
+                        >
+                            Name:
+                        </label>
+                        <br></br>
+                        <input
+                            type="text" value={name}
+                            className="bg-blue-100 w-60 text-center"
+                            onChange={(e) => setName(e.target.value)}></input>
+                    </div>
                 </div>
 
-                <div className="flex-1">
-                    <label
-                    >
-                        Name:
-                    </label>
-                    <br></br>
-                    <input
-                        type="text" value={name}
-                        className="bg-blue-100 w-60 text-center"
-                        onChange={(e) => setName(e.target.value)}></input>
-                </div>
 
                 <input
                     type="submit" value={"Submit"}
-                    className="bg-red-300 w-full h-1/12 rounded-lg mt-20"
+                    className="bg-red-300 w-1/6 h-8 hover:bg-red-400 hover:border-yellow-300 hover:border-2 rounded-lg"
                 />
             </form>
 
@@ -117,7 +123,7 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
                 title={modalState.title}
                 message={modalState.message}
                 isError={modalState.isError}
-                onClose={() => { }}
+                onClose={() => {navigate('/home')}}
             ></Modal>
         </div>
     );

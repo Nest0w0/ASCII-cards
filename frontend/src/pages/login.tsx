@@ -8,8 +8,8 @@ function Login(){
                         <div className = 'flex flex-col bg-gray-300 rounded-2xl'>
                             <a className='text-lg font-semibold mt-2'>Login</a>
                             <form className='p-5 space-y-4'>
-                                <label className='left-0 text-sm' htmlFor = 'username'>Username:</label><br/>
-                                <input className='border-2 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type = 'text' placeholder='Your username' id='username' name='username'/><br/>
+                                <label className='left-0 text-sm' htmlFor = 'username'>E-mail:</label><br/>
+                                <input className='border-2 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type = 'text' placeholder='Your e-mail' id='username' name='username'/><br/>
                                 
                                 <label className='text-left text-sm' htmlFor='password'> Password:</label><br/>
                                 <input className='border-3 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type = 'text' placeholder = '••••••••' id = 'password' name = 'password'/><br/>

@@ -8,6 +8,7 @@ import { CardModule } from './card/card.module';
 import { Card } from './card/entities/card.entity';
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -25,7 +26,8 @@ import { User } from './user/entities/user.entity';
       synchronize: true,
     }),
     CardModule,
-    UserModule
+    UserModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
