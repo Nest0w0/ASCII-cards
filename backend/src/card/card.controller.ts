@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CardService } from './card.service';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('card')
+@UseGuards(AuthGuard)
 export class CardController {
   constructor(private readonly cardService: CardService) {}
 

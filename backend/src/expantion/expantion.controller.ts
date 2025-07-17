@@ -1,9 +1,11 @@
-import { Body, Controller, Post, Get, Param, Patch, UsePipes, ValidationPipe, Delete} from '@nestjs/common'
+import { Body, Controller, Post, Get, Param, Patch, UsePipes, ValidationPipe, Delete, UseGuards} from '@nestjs/common'
 import { ExpantionService } from "./expantion.service";
 import { CreateExpantionDto } from './dto/create-expantion.dto';
 import { UpdateExpantionDto } from './dto/update-expantion.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('Expantion')
+@UseGuards(AuthGuard)
 export class ExpantionController{
     constructor(private readonly expantionService: ExpantionService){}
 

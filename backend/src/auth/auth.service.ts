@@ -1,9 +1,13 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UserService){}
+    constructor(
+        private readonly userService: UserService,
+        private readonly jwtService: JwtService,
+    ){}
 
 
     async login({email, password}){
@@ -18,7 +22,7 @@ export class AuthService {
         const user = await this.userService.findByEmail(email);
 
         if(!user){
-            throw new UnauthorizedException("Invalid Email");
+            throw new HttpException('USER_NOT_FOUND', 404);
         }
 
         const crypto = require('node:crypto');
@@ -26,9 +30,10 @@ export class AuthService {
         
 
         if(Hash === user.passwordHash){
-            return true;
+            const payload = {email: user.email, sub: user.id}
+            return {accessToken: this.jwtService.sign(payload)};
         }else{
-            throw new UnauthorizedException("Invalid Passsword");
+            throw new HttpException('INCORRECT_PASSWORD', 403);
         }
     }
 }

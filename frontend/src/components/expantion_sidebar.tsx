@@ -11,9 +11,18 @@ interface SideBarProps{
 function SideBar({onExpantionSelect, expantionID}: SideBarProps){
     const [expantions, SetExpantions] = useState([]);
     const navigate = useNavigate();
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        fetch('http://localhost:3000/expantion')
+        fetch(
+            'http://localhost:3000/expantion',
+        {
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+        })
         .then((data) => data.json())
         .then((data) => SetExpantions(data));
     }, []);

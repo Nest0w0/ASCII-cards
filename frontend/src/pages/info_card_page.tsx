@@ -7,6 +7,7 @@ import  Modal  from "../components/modal";
 function InfoCardPage() {
     const navigate = useNavigate();
     const cardID = useParams();
+    const token = localStorage.getItem('accessToken');
 
     const [card, setCard] = useState(
         {
@@ -31,7 +32,16 @@ function InfoCardPage() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:3000/card/' + cardID['id'])
+        fetch(
+            'http://localhost:3000/card/' + cardID['id'],
+            {
+                headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+            }
+        )
             .then((data) => data.json())
             .then((data) => setCard(data));
     }, []);
@@ -45,7 +55,8 @@ function InfoCardPage() {
                     method: 'DELETE',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: ''
                 }

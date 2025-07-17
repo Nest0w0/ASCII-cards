@@ -33,6 +33,8 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
         e.preventDefault();
 
         const url = (method === 'POST' ? 'http://localhost:3000/expantion' : 'http://localhost:3000/expantion/' + defaultID);
+        const token = localStorage.getItem('accessToken');
+
 
         try {
             const response = await fetch(
@@ -41,7 +43,8 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
                     method: method,
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         'name': name,

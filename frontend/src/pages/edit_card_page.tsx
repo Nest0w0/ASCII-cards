@@ -20,9 +20,19 @@ function EditCardPage(){
     );
     const cardID = useParams();
 
+    const token = localStorage.getItem('accessToken');
 
     useEffect(()=>{
-        fetch('http://localhost:3000/card/'+cardID['id'])
+        fetch(
+            'http://localhost:3000/card/'+cardID['id'],
+            {
+                headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+            }
+        )
         .then((data) => data.json())
         .then((data) => setCard(data));
     }, []);

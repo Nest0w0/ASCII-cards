@@ -6,9 +6,18 @@ import { useEffect, useState } from "react";
 function EditExpantionPage(){
     const [expantion, setExpantion] = useState({'id':0, 'icon': '', 'name': ''});
     const ExpantionID = useParams();
+    const token = localStorage.getItem('accessToken');
 
     useEffect(() => {
-        fetch('http://localhost:3000/expantion/'+ExpantionID['id'])
+        fetch(
+            'http://localhost:3000/expantion/'+ExpantionID['id'],
+        {
+            headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+        })
         .then((data) => data.json())
         .then((data) => setExpantion(data));
     });

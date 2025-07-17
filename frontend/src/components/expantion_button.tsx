@@ -27,6 +27,8 @@ function ExpantionButton({ onExpantionSelect, expantionID, expantion }: Expantio
         //Acá no necesitamos el "preventDefault", porque no es cuestionario
         const url = 'http://localhost:3000/expantion/' + expantion['id'];
 
+        const token = localStorage.getItem('accessToken');
+
         try {
             const response = await fetch(
                 url,
@@ -34,7 +36,8 @@ function ExpantionButton({ onExpantionSelect, expantionID, expantion }: Expantio
                     method: 'DELETE',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: ''
                 }

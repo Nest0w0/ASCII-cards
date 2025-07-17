@@ -28,8 +28,18 @@ function CardForm({ defaultExpantionID, defaultMana, defaultName, defaultAttack,
 
     const navigate = useNavigate();
 
+    const token = localStorage.getItem('accessToken');
+
     useEffect(() => {
-        fetch('http://localhost:3000/expantion')
+        fetch('http://localhost:3000/expantion',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
             .then((data) => data.json())
             .then((data) => setExpantions(data));
     }, []);
@@ -63,6 +73,7 @@ function CardForm({ defaultExpantionID, defaultMana, defaultName, defaultAttack,
         //Un if terciario para determinar la dirección a la que realizar la petición
         const url = (method === 'POST' ? 'http://localhost:3000/card/' : 'http://localhost:3000/card/' + cardID);
 
+
         try {
             const response = await fetch(
                 url,
@@ -70,7 +81,8 @@ function CardForm({ defaultExpantionID, defaultMana, defaultName, defaultAttack,
                     method: method,
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         "name": name,
@@ -235,7 +247,7 @@ function CardForm({ defaultExpantionID, defaultMana, defaultName, defaultAttack,
                 title={modalState.title}
                 message={modalState.message}
                 isError={modalState.isError}
-                onClose={() => {navigate('/home')}}
+                onClose={() => { navigate('/home') }}
             >
 
             </Modal>
