@@ -15,8 +15,8 @@ export class UserService {
   ){}
 
   async create(createUserDto: CreateUserDto) {
-
-    const userExist = await this.findByUsername(createUserDto.username);
+    /*
+    const userExist = await this.findByEmail(createUserDto.email);
     
     if (userExist){
       throw new ConflictException("This username already exists");
@@ -32,7 +32,7 @@ export class UserService {
     createUserDto.passwordHash = passwordHash;
     //Este Hash es entonces tratado como la contraseña del usuario, se guardará en la BD y se usará para la autenticación
     //de ahora en adelante
-
+    */
     return this.userRepository.save(createUserDto);
   }
 

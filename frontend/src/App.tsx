@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/login';
+import Register from './pages/register_page'
 import Home from './pages/home';
 import AddCardPage from './pages/add_card_page';
 import InfoCardPage from './pages/info_card_page';
@@ -15,11 +16,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />}></Route>
+          <Route path='/register' element={<Register/>}></Route>
 
           {
             //Al poner unas rutas dentro de otras, hace que estén protegidas. Investigar esto mejor luego
           }
-
           <Route element={<ProtectedRoute />}>
             <Route path='/home' element={<Home />}></Route>
             <Route path='/add_card' element={<AddCardPage/>}></Route>
