@@ -65,6 +65,15 @@ function Login() {
                     </form>
                 </div>
             </div>
+
+            <p className='mt-3 mx-auto'>
+                Not have an account yet?
+                <a
+                className='ml-3 p-1.5 text-lg text-blue-400 hover:text-blue-600 hover:font-bold hover:border-2 hover:border-yellow-300 rounded-lg'
+                onClick={() => navigate('/register')}>
+                    Register
+                </a>
+            </p>
         </section>
     );
 }
