@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Icon from "./icon";
+import Icon from "./small_icon";
 
 interface NavBarProps {
     title: string;

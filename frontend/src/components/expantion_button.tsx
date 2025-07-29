@@ -74,24 +74,42 @@ function ExpantionButton({ onExpantionSelect, expantionID, expantion }: Expantio
         <>
             <div
                 key={expantion['id']}
-                className={`${expantionID == expantion['id'] ? 'bg-blue-300 font-bold' : ''} flex items-center w-full justify-between h-20 text-m hover:text-base border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
+                className={`${expantionID == expantion['id'] ? 'bg-blue-200 font-bold' : ''} flex items-center w-full justify-between h-30 text-m hover:text-base border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
                 onClick={() => { onExpantionSelect(expantion['id']) }}
             >
-                <a className="ml-5">{expantion['icon']}</a>
-                <a className="flex flex-1 justify-center">{expantion['name']}</a>
+                <div className="ml-1.5 leading-5">
+                    
+                    <p>╔═══╗</p>
+                    <p>║ {expantion['icon']} ║</p>
+                    <p>╚═══╝</p>
+                </div>
+                
+                <a className="flex flex-1 justify-center text-lg">{expantion['name']}</a>
 
-                <div className="flex-col w-1/5">
+                <div className="flex-col w-1/5 mr-2">
                     <button
-                        className={`${expantionID == expantion['id'] ? 'bg-gray-200 hover:bg-gray-300' : 'bg-blue-200 hover:bg-blue-300'} h-6 w-11 rounded-sm mb-1 `}
+                        className={`${expantionID == expantion['id'] ? 'hover:bg-blue-200' : 'hover:bg-blue-300'} flex flex-col w-14 leading-5`}
                         onClick={() => navigate('/edit_expantion/' + expantion['id'])}
                     >
-                        Edit
+                        <p className="text-left -mb-1">
+                            ╔     <span className="float-end">╗</span>
+                        </p>
+                        <p> Edit </p>
+                        <p className="text-left -mt-1">
+                            ╚     <span className="float-end">╝</span>
+                            </p>
                     </button>
 
                     <button
-                        className="bg-red-300 hover:bg-red-400 h-6 w-11 rounded-sm mt-1"
+                        className="hover:bg-red-400 flex flex-col w-14 leading-5"
                         onClick={() => Submit()}>
-                        Erase
+                        <p className="text-left -mb-1">
+                            ╔     <span className="float-end">╗</span>
+                        </p>
+                        <p> Erase </p>
+                        <p className="text-left -mt-1">
+                            ╚     <span className="float-end">╝</span>
+                            </p>
                     </button>
                 </div>
             </div>

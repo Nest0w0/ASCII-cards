@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../index.css'
 import { useState, type FormEvent } from 'react';
+import BigIcon from '../components/big_icon';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -45,32 +46,48 @@ function Login() {
     return (
         <section className='h-full'>
             <div className='flex flex-col m-auto w-1/3 h-full'>
-                <h1 className='font-bold text-gray-900 text-2xl mb-10'>ASCII Cards</h1>
-                <div className='flex flex-col bg-gray-300 rounded-2xl'>
+                <BigIcon />
+                <div className='flex flex-col bg-gray-300 mt-7'>
+                    <p className='-mt-3'>╔════════════════════════════════════════════╗</p>
                     <a className='text-lg font-semibold mt-2'>Login</a>
 
                     <form className='p-5 space-y-4' onSubmit={Submit}>
                         <label className='left-0 text-sm' htmlFor='username'>E-mail:</label><br />
-                        <input onChange={(e) => setEmail(e.target.value)}
-                            className='border-2 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type='text' placeholder='Your e-mail' id='username' name='username' /><br />
+                        <div className='w-full leading-5 group'>
+                            <p className="text-left">╔<span className="float-end">╗</span></p>
+                            <input onChange={(e) => setEmail(e.target.value)}
+                                className='text-gray-900 h-10 w-85 p-2 bg-gray-200  border-2 border-blue-200 group-hover:border-blue-300' type='text' placeholder='Your e-mail' id='username' name='username' /><br />
+                            <p className="text-left">╚ <span className="float-end">╝</span></p>
+                        </div>
 
                         <label className='text-left text-sm' htmlFor='password'> Password:</label><br />
-                        <input onChange={(e) => setPassword(e.target.value)}
-                            className='border-3 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type='text' placeholder='••••••••' id='password' name='password' /><br />
+                        <div className='w-full leading-5 group'>
+                            <p className="text-left">╔<span className="float-end">╗</span></p>
+                            <input onChange={(e) => setPassword(e.target.value)}
+                                className='text-gray-900 h-10 w-85 p-2 bg-gray-200 border-2 border-blue-200 group-hover:border-blue-300' type='text' placeholder='••••••••' id='password' name='password' /><br />
+                            <p className="text-left">╚ <span className="float-end">╝</span></p>
+                        </div>
 
-                        <input
-                            type='Submit' value={"Submit"}
-                            className='bg-blue-400 border-2 border-blue-300 w-1/4 h-10 rounded-lg mx-auto my-5 text-sm focus:bg-blue-500 focus:border-yellow-400'>
-                        </input>
+
+
+                        <div className="flex flex-col justify-self-center group leading-5 w-1/6 h-8 mb-3">
+                            <p className="text-left group-hover:bg-blue-100">╔<span className="float-end">╗</span></p>
+                            <input
+                                type='Submit' value={"Submit"}
+                                className='text-sm group-hover:bg-blue-100'>
+                            </input>
+                            <p className="text-left group-hover:bg-blue-100">╚ <span className="float-end">╝</span></p>
+                        </div>
                     </form>
+                    <p className='-mb-3'>╚════════════════════════════════════════════╝</p>
                 </div>
             </div>
 
             <p className='mt-3 mx-auto'>
                 Not have an account yet?
                 <a
-                className='ml-3 p-1.5 text-lg text-blue-400 hover:text-blue-600 hover:font-bold hover:border-2 hover:border-yellow-300 rounded-lg'
-                onClick={() => navigate('/register')}>
+                    className='ml-3 p-1.5 text-lg text-blue-400 hover:text-blue-600 hover:font-bold hover:border-2 hover:border-yellow-300 rounded-lg'
+                    onClick={() => navigate('/register')}>
                     Register
                 </a>
             </p>

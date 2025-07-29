@@ -83,42 +83,59 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
     }
 
     return (
-        <div className="bg-blue-300 w-1/3 rounded-lg">
-            <p className="mb-5 mt-3 text-lg">
+        <div className="bg-gray-200 w-1/3 h-67">
+            <p className="-mt-3">
+                ╔════════════════════════════════════════════╗
+            </p>
+            <p className="mt-3 text-lg font-bold">
                 {title}
+            </p>
+            <p className="mb-5">
+                ╚══════════════════╝
             </p>
 
             <form className="mb-5" onSubmit={Submit}>
-                <div className="flex flex-row mb-5">
-                    <div className="flex-colw-15 ml-10">
+                <div className="flex flex-row leading-4 mb-5">
+                    <div className="flex-col w-15 group ml-10">
                         <label>
                             Icon:
                         </label>
                         <br></br>
+                        <p className="text-left">╔<span className="float-end">╗</span></p>
                         <input
                             type="text" maxLength={1} value={icon}
-                            className="bg-blue-100 w-15 text-center"
+                            className="w-10 text-center rounded-sm group-hover:bg-blue-100 group-hover:border-b-3 group-hover:-mb-3"
                             onChange={(e) => setIcon(e.target.value)}></input>
+                        <p className="text-left">╚ <span className="float-end">╝</span></p>
                     </div>
 
-                    <div className="flex-1">
+                    <div className="group flex-1 mx-7">
                         <label
                         >
                             Name:
                         </label>
                         <br></br>
+                        <p className="text-left">╔<span className="float-end">╗</span></p>
                         <input
                             type="text" value={name}
-                            className="bg-blue-100 w-60 text-center"
+                            className="w-50 text-center rounded-sm group-hover:bg-blue-100 group-hover:border-b-3 group-hover:-mb-3"
                             onChange={(e) => setName(e.target.value)}></input>
+                        <p className="text-left">╚ <span className="float-end">╝</span></p>
                     </div>
                 </div>
 
 
-                <input
-                    type="submit" value={"Submit"}
-                    className="bg-red-300 w-1/6 h-8 hover:bg-red-400 hover:border-yellow-300 hover:border-2 rounded-lg"
-                />
+                <div className="flex flex-col justify-self-center group leading-5 w-1/6 h-8 mb-10">
+                    <p className="text-left group-hover:bg-blue-100">╔<span className="float-end">╗</span></p>
+                    <input
+                        type="submit" value={"Submit"}
+                        className="group-hover:bg-blue-100"
+                    />
+                    <p className="text-left group-hover:bg-blue-100">╚ <span className="float-end">╝</span></p>
+                </div>
+                <p>
+                    ╚════════════════════════════════════════════╝
+                </p>
             </form>
 
             <Modal
@@ -126,7 +143,7 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
                 title={modalState.title}
                 message={modalState.message}
                 isError={modalState.isError}
-                onClose={() => {navigate('/home')}}
+                onClose={() => { navigate('/home') }}
             ></Modal>
         </div>
     );

@@ -50,7 +50,7 @@ function Home() {
     return (
 
         <section className="w-full h-full">
-            <NavBar title="Lista de Cartas"></NavBar>
+            <NavBar title="Card List"></NavBar>
 
             <div className="flex">
                 <SideBar onExpantionSelect={handleSelectedExpantion} expantionID={selectedExpantionID}>
