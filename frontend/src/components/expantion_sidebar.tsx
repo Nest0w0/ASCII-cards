@@ -38,11 +38,12 @@ function SideBar({ onExpantionSelect, expantionID }: SideBarProps) {
                     id='All expantions button'
                     key={0}
                     className={
-                        `${expantionID == 0 ? 'bg-blue-200 font-bold' : ''} flex items-center w-full justify-between h-15 text-m hover:text-lg border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
+                        `${expantionID == 0 ? 'bg-blue-200 font-bold' : 'hover:font-bold '} flex flex-col items-center text-lg w-full h-15 text-m border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
 
                     onClick={() => onExpantionSelect(0)}
                 >
-                    <a className="flex flex-1 justify-center">All</a>
+                    <p className="mt-4 -mb-2">All</p>
+                    <p>╚════╝</p>
                 </button>
 
                 {
@@ -60,14 +61,14 @@ function SideBar({ onExpantionSelect, expantionID }: SideBarProps) {
                     id='Add expantion button'
                     key={-99}
                     className={
-                        `flex justify-center items-center w-full h-25 text-lg group hover:text-lg border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
+                        `flex justify-center items-center w-full h-25 text-lg group border-b-2 hover:border-b-3 hover:font-bold hover:bg-blue-100 hover:border-b-blue-300`}
                     onClick={() => { navigate('/add_expantion') }}
                 >
-                    <div className="flex flex-col justify-center w-1/5 leading-5 group-hover:bg-blue-300">
-                        <p className="text-left">
+                    <div className="flex flex-col justify-center w-1/5 leading-5">
+                        <p className="text-left group-hover:text-green-600">
                             ╔ <span className="float-end">╗</span></p>
                         <p >+</p>
-                        <p className="text-left">
+                        <p className="text-left group-hover:text-green-600">
                             ╚ <span className="float-end">╝</span></p>
                     </div>
                 </button>

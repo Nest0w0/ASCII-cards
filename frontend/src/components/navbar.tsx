@@ -11,10 +11,12 @@ function NavBar({ title }: NavBarProps) {
     return (
         <nav id='navbar' className="flex flex-row bg-gray-100 w-full h-15 items-center content-center">
             <button
-                className="bg-blue-400 border-2 border-blue-300 w-1/12 h-10 rounded-lg mx-5 focus:bg-blue-400 focus:border-yellow-400"
+                className="flex flex-col w-15 ml-3 group"
                 onClick={() => navigate(-1)}
             >
-                Exit
+                <p className='text-left group-hover:text-blue-500'>╔ <span className='float-end'>╗</span></p>
+                <p className='text-4xl font-bold -my-2'>«</p>
+                <p className='text-left group-hover:text-blue-500'>╚<span className='float-end g'>╝</span></p>
             </button>
 
             <div className="flex w-55 mx-auto px-3 justify-between">

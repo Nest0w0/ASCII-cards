@@ -37,7 +37,7 @@ function Modal({ isOpen, onClose, title, message, isError = false }: ModalProps)
         }
     }, [isOpen]);
 
-    const borderColor = isError ? 'border-red-500' : 'border-blue-300';
+    const borderColor = isError ? 'border-red-500' : 'border-blue-400';
     const titleColor = isError ? 'text-red-700' : 'text-blue-400';
 
     return (
@@ -47,15 +47,18 @@ function Modal({ isOpen, onClose, title, message, isError = false }: ModalProps)
                 cada vez que usemos "dialogRef.current", accederemos específicamente a esta etiqueta    
                 */
             }
-            <h3 className={`text-2xl font-bold mb-2 ${titleColor}`}>{title}</h3>
+            <h3 className={`text-2xl font-bold -mb-2 ${titleColor}`}>{title}</h3>
+            <p className={`${titleColor}`}>╚══════════════════════════╝</p>
             <p className="text-gray-700 mb-6">{message}</p>
             <form method="dialog" className="flex justify-center">
                 {/* Un botón dentro de un form con method="dialog" cierra el diálogo por defecto */}
                 <button
-                    className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                    className="flex flex-col w-1/4 font-bold group"
                     onClick={onClose}
                 >
-                    Cerrar
+                    <p className={`text-left -mb-1 group-hover:${titleColor}`}>╔ <span className='float-end'>╗</span></p>
+                    <p className='text-center'>Close</p>
+                    <p className={`text-left -mb-1 group-hover:${titleColor}`}>╚<span className='float-end'>╝</span></p>
                 </button>
             </form>
         </dialog>

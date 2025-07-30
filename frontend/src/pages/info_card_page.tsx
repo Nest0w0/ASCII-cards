@@ -25,9 +25,9 @@ function InfoCardPage() {
     );
 
     const [modalState, setModalState] = useState({
-        isOpen: false,
-        title: '',
-        message: '',
+        isOpen: true,
+        title: 'skibidi',
+        message: 'toilet',
         isError: false,
     });
 
@@ -120,15 +120,19 @@ function InfoCardPage() {
 
                 <div className="flex flex-row w-full justify-center">
                     <button
-                        className="bg-blue-300 w-30 h-15 rounded-lg mt-15 mr-15 hover:border-2 hover:border-yellow-200"
+                        className="w-20 h-15 mt-15 mr-15 flex flex-col group"
                         onClick={() => navigate('/edit_card/' + card['id'])}>
-                        Edit
+                        <p className='text-left -mb-1 group-hover:text-blue-500'>╔ <span className='float-end'>╗</span></p>
+                        <p>Edit</p>
+                        <p className='text-left -mt-1 group-hover:text-blue-500'>╚<span className='float-end g'>╝</span></p>
                     </button>
 
                     <button
-                        className="bg-red-300 w-30 rounded-lg mt-15 ml-15 focus:bg-red-400 hover:border-2 hover:border-yellow-200"
+                        className="w-20 rounded-lg mt-15 ml-15 flex flex-col group"
                         onClick={() => Delete()}>
-                        Erase
+                        <p className='text-left -mb-1 group-hover:text-red-500'>╔ <span className='float-end'>╗</span></p>
+                        <p>Erase</p>
+                        <p className='text-left -mt-1 group-hover:text-red-500'>╚<span className='float-end g'>╝</span></p>
                     </button>
                 </div>
             </div>

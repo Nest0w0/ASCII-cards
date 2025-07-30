@@ -29,10 +29,12 @@ function CardList({cardsList}: CardListProps){
         }
         <div className="h-60 w-1/2">
             <button
-            className="flex bg-gray-300 group hover:bg-blue-300 hover:text-bold w-30 h-30 my-15 mx-15 rounded-lg"
+            className="flex flex-col group w-30 h-30 my-15 mx-15"
             onClick={() => navigate("/add_card")}
             >
-                <a className="text-2xl m-auto group-hover:text-bold">+</a>
+                 <p className='text-left -mb-1 group-hover:text-blue-400'>╔ <span className='float-end'>╗</span></p>
+                <a className="text-3xl m-auto text-bold">+</a>
+                <p className='text-left -mt-1 group-hover:text-blue-500'>╚<span className='float-end g'>╝</span></p>
             </button>
         </div>
         

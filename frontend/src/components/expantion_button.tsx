@@ -88,26 +88,26 @@ function ExpantionButton({ onExpantionSelect, expantionID, expantion }: Expantio
 
                 <div className="flex-col w-1/5 mr-2">
                     <button
-                        className={`${expantionID == expantion['id'] ? 'hover:bg-blue-200' : 'hover:bg-blue-300'} flex flex-col w-14 leading-5`}
+                        className={`flex flex-col group w-14 leading-5`}
                         onClick={() => navigate('/edit_expantion/' + expantion['id'])}
                     >
-                        <p className="text-left -mb-1">
+                        <p className="text-left -mb-1 group-hover:text-blue-400">
                             ╔     <span className="float-end">╗</span>
                         </p>
                         <p> Edit </p>
-                        <p className="text-left -mt-1">
+                        <p className="text-left -mt-1 group-hover:text-blue-400">
                             ╚     <span className="float-end">╝</span>
                             </p>
                     </button>
 
                     <button
-                        className="hover:bg-red-400 flex flex-col w-14 leading-5"
+                        className="flex flex-col w-14 leading-5 group"
                         onClick={() => Submit()}>
-                        <p className="text-left -mb-1">
+                        <p className="text-left -mb-1 group-hover:text-red-400">
                             ╔     <span className="float-end">╗</span>
                         </p>
                         <p> Erase </p>
-                        <p className="text-left -mt-1">
+                        <p className="text-left -mt-1 group-hover:text-red-400">
                             ╚     <span className="float-end">╝</span>
                             </p>
                     </button>

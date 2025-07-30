@@ -236,10 +236,14 @@ function CardForm({ defaultExpantionID, defaultMana, defaultName, defaultAttack,
                     <p className="text-left -ml-10">Attack: <span className="float-end -mr-5">Health:</span></p>
                 </div>
 
-                <input
-                    type="submit" value={"Submit"}
-                    className="bg-red-300 w-full h-1/12 rounded-lg mt-20"
-                />
+                <div className="flex flex-col justify-center mx-auto mt-10 w-1/2 h-20 group">
+                    <p className='text-left -mb-1 group-hover:text-blue-400'>╔ <span className='float-end'>╗</span></p>
+                    <input
+                        type="submit" value={"Submit"}
+                        className="text-lg"
+                    />
+                    <p className='text-left -mt-1 group-hover:text-blue-400'>╚<span className='float-end g'>╝</span></p>
+                </div>
             </form>
 
             <Modal
