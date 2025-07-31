@@ -126,12 +126,12 @@ function ExpantionForm({ defaultID, defaultIcon, defaultName, title, method }: E
 
 
                 <div className="flex flex-col justify-self-center group leading-5 w-1/6 h-8 mb-10">
-                    <p className="text-left group-hover:bg-blue-100">╔<span className="float-end">╗</span></p>
+                    <p className="text-left group-hover:text-blue-400">╔<span className="float-end">╗</span></p>
                     <input
                         type="submit" value={"Submit"}
-                        className="group-hover:bg-blue-100"
+                        className="group-hover:font-bold"
                     />
-                    <p className="text-left group-hover:bg-blue-100">╚ <span className="float-end">╝</span></p>
+                    <p className="text-left group-hover:text-blue-400">╚ <span className="float-end">╝</span></p>
                 </div>
                 <p>
                     ╚════════════════════════════════════════════╝

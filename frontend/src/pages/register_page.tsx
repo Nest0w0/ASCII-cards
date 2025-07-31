@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import Modal from "../components/modal";
 import { useNavigate } from "react-router-dom";
+import BigIcon from "../components/big_icon";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -63,38 +64,73 @@ function Register() {
         <>
             <section className='h-full'>
                 <div className='flex flex-col m-auto w-1/3 h-full'>
-                    <h1 className='font-bold text-gray-900 text-2xl mb-10'>ASCII Cards</h1>
-                    <div className='flex flex-col bg-gray-300 rounded-2xl'>
+                    <BigIcon />
+                    <div className='flex flex-col bg-gray-300 mt-7'>
+                        <p className='-mt-3'>╔════════════════════════════════════════════╗</p>
                         <a className='text-lg font-semibold mt-2'>Register</a>
+                        <p>╚══════════╝</p>
 
                         <form className='p-5 space-y-4' onSubmit={Submit}>
                             <label className='text-sm' htmlFor='username'>Username:</label>
-                            <input
-                                className='h-10 w-full bg-gray-200 rounded-lg border-2 border-blue-300 focus:border-yellow-400 focus:border-3' type='text' placeholder='Your username'
-                                onChange={(e) => setUsername(e.target.value)}
-                            >
 
-                            </input><br />
+                            <div className='w-full leading-5 group'>
+                                <p className="text-left group-hover:text-blue-400">╔<span className="float-end">╗</span></p>
+                                <input
+                                    className='h-10 w-85 p-2 bg-gray-200 border-2 border-blue-200 group-hover:border-blue-300' type='text' placeholder='Your username'
+                                    onChange={(e) => setUsername(e.target.value)}
+                                >
+                                </input><br />
+                                <p className="text-left group-hover:text-blue-400">╚ <span className="float-end">╝</span></p>
+                            </div>
+
+
 
                             <label className='text-sm' htmlFor='email'>E-mail:</label><br />
-                            <input
-                                className='border-2 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type='text' placeholder='Your e-mail' id='email' name='email'
-                                onChange={(e) => setEmail(e.target.value)}
-                            /><br />
+                            <div className='w-full leading-5 group'>
+                                <p className="text-left group-hover:text-blue-400">╔<span className="float-end">╗</span></p>
+                                <input
+                                    className='h-10 w-85 p-2 bg-gray-200 border-2 border-blue-200 group-hover:border-blue-300' type='text' placeholder='Your e-mail' id='email' name='email'
+                                    onChange={(e) => setEmail(e.target.value)}
+                                /><br />
+                                <p className="text-left group-hover:text-blue-400">╚ <span className="float-end">╝</span></p>
+                            </div>
 
                             <label className='text-sm' htmlFor='password'> Password:</label><br />
-                            <input
-                                className='border-2 bg-gray-200 text-gray-900 border-blue-300 w-full rounded-lg h-10 focus:border-yellow-400 focus:border-3' type='text' placeholder='••••••••' id='password' name='password'
-                                onChange={(e) => setPassword(e.target.value)}
-                            /><br />
+                            <div className='w-full leading-5 group'>
+                                <p className="text-left group-hover:text-blue-400">╔<span className="float-end">╗</span></p>
+                                <input
+                                    className='h-10 w-85 p-2 bg-gray-200 border-2 border-blue-200 group-hover:border-blue-300' type='text' placeholder='••••••••' id='password' name='password'
+                                    onChange={(e) => setPassword(e.target.value)}
+                                /><br />
+                                <p className="text-left group-hover:text-blue-400">╚ <span className="float-end">╝</span></p>
+                            </div>
 
-                            <input
-                                type='Submit' value={"Submit"} readOnly
-                                className='bg-blue-400 border-2 border-blue-300 w-1/4 h-10 rounded-lg mx-auto my-5 text-sm focus:bg-blue-500 focus:border-yellow-400'>
-                            </input>
+                            <div className="flex flex-col justify-self-center group leading-5 w-1/6 h-8 mb-3">
+                                <p className="text-left group-hover:text-blue-400">╔<span className="float-end">╗</span></p>
+                                <input
+                                    type='Submit' value={"Submit"}
+                                    className='group-hover:font-bold'>
+                                </input>
+                                <p className="text-left group-hover:text-blue-400">╚ <span className="float-end">╝</span></p>
+                            </div>
                         </form>
+                        <p className='-mb-3'>╚════════════════════════════════════════════╝</p>
                     </div>
                 </div>
+
+                <p className='mt-3 mx-auto flex flex-row justify-center items-center h-20 w-1/3'>
+                Already have an account?
+                <div className='ml-3 flex flex-col group'>
+                    <p className='text-left -mb-1 group-hover:text-blue-500'>╔ <span className='float-end'>╗</span></p>
+                    <p
+                        className='text-lg group-hover:font-bold'
+                        onClick={() => navigate('/')}>
+                        <span className='group-hover:text-blue-400'>║</span> Log In <span className='group-hover:text-blue-400'>║</span>
+                    </p>
+                    <p className='text-left -mt-1 group-hover:text-blue-500'>╚<span className='float-end g'>╝</span></p>
+                </div>
+
+            </p>
             </section>
 
             <Modal

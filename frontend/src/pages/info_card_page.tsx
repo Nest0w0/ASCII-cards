@@ -25,9 +25,9 @@ function InfoCardPage() {
     );
 
     const [modalState, setModalState] = useState({
-        isOpen: true,
-        title: 'skibidi',
-        message: 'toilet',
+        isOpen: false,
+        title: '',
+        message: '',
         isError: false,
     });
 
